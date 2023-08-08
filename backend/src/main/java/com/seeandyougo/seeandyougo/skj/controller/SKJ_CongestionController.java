@@ -1,14 +1,14 @@
-package com.seeandyougo.seeandyougo.kjs.controller;
+package com.seeandyougo.seeandyougo.skj.controller;
 
-import com.seeandyougo.seeandyougo.kjs.dto.CongestionResponse;
+import com.seeandyougo.seeandyougo.skj.dto.CongestionResponse;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/kjs")
-public class CongestionController {
+@RequestMapping("/skj")
+public class SKJ_CongestionController {
     @GetMapping("/get_congestion/restaurant2")
     public ResponseEntity<CongestionResponse> congestionRequest(){
         CongestionResponse congestionResponse = new CongestionResponse();
