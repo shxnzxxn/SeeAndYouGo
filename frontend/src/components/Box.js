@@ -29,7 +29,7 @@ const Box = ({ idx }) => {
     useEffect(() => {
         const fetchData = async () => { 
             const res = await fetch(
-                `/assets/json/restaurant${idx}.json`,
+                `http://localhost:8080/skj/get_congestion/restaurant${idx}`,
                 {
                     headers: {
                         'Content-Type': 'application/json',

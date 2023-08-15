@@ -27,7 +27,7 @@ public class CrowdRepository {
 
     public int[] callData(String place) throws IOException {
         String apiUrl = "http://localhost:3000/svc/offcam/pub/WifiAllInfo"; // API 엔드포인트
-        String queryParams = "?AUTH_KEY=asd"; // 필요한 매개변수
+        String queryParams = "?AUTH_KEY=asd&limit_seconds=100000&limit_requests=100000"; // 필요한 매개변수
 
         // URL 생성
         URL url = new URL(apiUrl + queryParams);
