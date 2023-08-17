@@ -1,4 +1,4 @@
-package com.seeandyougo.seeandyougo.skj.controller.repository;
+package com.seeandyougo.seeandyougo.skj.repository;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
@@ -21,7 +21,7 @@ import java.net.URLEncoder;
 @RequiredArgsConstructor
 public class CrowdRepository {
     private final EntityManager em;
-    private Integer capacity = 200;
+    private Integer capacity = 300;
     private Integer connected;
 
 
