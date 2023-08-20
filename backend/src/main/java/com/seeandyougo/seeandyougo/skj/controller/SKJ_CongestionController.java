@@ -1,7 +1,7 @@
 package com.seeandyougo.seeandyougo.skj.controller;
 
 import com.seeandyougo.seeandyougo.skj.dto.CongestionResponse;
-import com.seeandyougo.seeandyougo.skj.service.CrowdService;
+import com.seeandyougo.seeandyougo.skj.service.ConnectedTableService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
@@ -10,27 +10,20 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.io.IOException;
-
 @RestController
 @RequestMapping("/skj")
 @RequiredArgsConstructor
 public class SKJ_CongestionController {
-    private final CrowdService crowdService;
+    private final ConnectedTableService connectedTableService;
 
     @GetMapping("/get_congestion/{restaurant}")
     public ResponseEntity<CongestionResponse> congestionRequest(@PathVariable("restaurant") String place){
         CongestionResponse congestionResponse = new CongestionResponse();
 
-            int[] crowdStatus;
-        try {
-            crowdStatus = crowdService.getCrowdStatus(place);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        Integer connected = connectedTableService.callConnectedInDB(place);
 
-        congestionResponse.setCapacity(crowdStatus[0]);
-        congestionResponse.setConnected(crowdStatus[1]);
+        congestionResponse.setCapacity(200);
+        congestionResponse.setConnected(connected);
 
         return ResponseEntity.ok(congestionResponse);
     }
