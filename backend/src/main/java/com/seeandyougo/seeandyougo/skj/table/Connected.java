@@ -7,7 +7,7 @@ import javax.persistence.*;
 
 @Entity
 @Getter @Setter
-public class ConnectedTable {
+public class Connected {
 
     @Id @GeneratedValue
     private Long id;
