@@ -1,6 +1,6 @@
-package com.seeandyougo.seeandyougo.skj.service;
+package com.seeandyougo.seeandyougo.cjh.service;
 
-import com.seeandyougo.seeandyougo.skj.repository.CrowdRepository;
+import com.seeandyougo.seeandyougo.cjh.controller.repository.CrowdRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,7 +17,7 @@ public class CrowdService {
     public int[] getCrowdStatus(String place) throws IOException {
         String[] placeArr = place.split("");
         String num = placeArr[placeArr.length-1];
-        String resName = num + "학생회관";
+        String resName = "학생회관"+num;
         return cr.callData(resName);
     }
 }
