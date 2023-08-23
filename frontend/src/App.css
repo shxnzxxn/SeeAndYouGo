@@ -1,11 +1,19 @@
 @import url('https://fonts.googleapis.com/css2?family=Jua&display=swap');
 * {font-family: 'Jua', sans-serif;}
 
+/* 기본 body 세팅 
+  width는 총 360px (좌우 padding 고려)
+  padding top은 50px
+  padding 좌우는 30px씩
+  배경색은 회색 #e5e5e5
+*/
 body {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #f5f5f5;
+  background-color: #E5E5E5;
+  width: 300px;
+  padding: 50px 30px 0 30px;
 }
 
 .App {
