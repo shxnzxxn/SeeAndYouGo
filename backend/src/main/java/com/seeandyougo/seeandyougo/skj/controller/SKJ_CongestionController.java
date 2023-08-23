@@ -1,8 +1,7 @@
 package com.seeandyougo.seeandyougo.skj.controller;
 
 import com.seeandyougo.seeandyougo.skj.dto.CongestionResponse;
-import com.seeandyougo.seeandyougo.skj.service.ConnectedTableService;
-import com.seeandyougo.seeandyougo.skj.service.RawWifiService;
+import com.seeandyougo.seeandyougo.skj.service.CrowdService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
@@ -15,25 +14,32 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/skj")
 @RequiredArgsConstructor
-@CrossOrigin(origins="http://localhost:3001")
+@CrossOrigin(origins = "http://localhost:3001")
 public class SKJ_CongestionController {
     private final ConnectedTableService connectedTableService;
     private final RawWifiService rawWifiService;
+    private final CrowdService crowdService;
 
     @GetMapping("/get_congestion/{restaurant}")
-    public ResponseEntity<CongestionResponse> congestionRequest(@PathVariable("restaurant") String place) throws Exception {
+    public ResponseEntity<CongestionResponse> congestionRequest(@PathVariable("restaurant") String place) {
         CongestionResponse congestionResponse = new CongestionResponse();
-//        Integer connected = connectedTableService.callConnectedInDB(place);
-        rawWifiService.saveRawWifiData();
 
-        congestionResponse.setCapacity(200);
-        congestionResponse.setConnected(1);
+        int[] crowdStatus;
+
+        try {
+            crowdStatus = crowdService.getCrowdStatus(place);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        congestionResponse.setCapacity(crowdStatus[0]);
+        congestionResponse.setConnected(crowdStatus[1]);
 
         return ResponseEntity.ok(congestionResponse);
     }
 
     @GetMapping("/")
-    public String index(Model model){
+    public String index(Model model) {
         return "index";
     }
 }
