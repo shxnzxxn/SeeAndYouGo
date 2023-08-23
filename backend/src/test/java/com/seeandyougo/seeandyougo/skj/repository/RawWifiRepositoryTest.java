@@ -23,7 +23,7 @@ class RawWifiRepositoryTest {
     @Rollback(false)
     public void deleteAll_test() throws Exception {
         // given
-//        rawWifiService.saveRawWifiData();
+        rawWifiService.saveRawWifiData();
 
         // when
 //        rawWifiRepository.deleteAll();
