@@ -11,21 +11,20 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.io.IOException;
+
 @RestController
 @RequestMapping("/skj")
 @RequiredArgsConstructor
-@CrossOrigin(origins = "http://localhost:3001")
+@CrossOrigin(origins="http://localhost:3001")
 public class SKJ_CongestionController {
-    private final ConnectedTableService connectedTableService;
-    private final RawWifiService rawWifiService;
     private final CrowdService crowdService;
 
     @GetMapping("/get_congestion/{restaurant}")
-    public ResponseEntity<CongestionResponse> congestionRequest(@PathVariable("restaurant") String place) {
+    public ResponseEntity<CongestionResponse> congestionRequest(@PathVariable("restaurant") String place){
         CongestionResponse congestionResponse = new CongestionResponse();
 
-        int[] crowdStatus;
-
+            int[] crowdStatus;
         try {
             crowdStatus = crowdService.getCrowdStatus(place);
         } catch (IOException e) {
@@ -39,7 +38,7 @@ public class SKJ_CongestionController {
     }
 
     @GetMapping("/")
-    public String index(Model model) {
+    public String index(Model model){
         return "index";
     }
 }

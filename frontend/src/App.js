@@ -1,51 +1,37 @@
-import Progress from "./components/Progress";
-import Header from "./components/Header";
-import Icon from "./components/IconComponent";
-import Box from "./components/Box";
-import "./App.css";
+import styled from '@emotion/styled';
+import React from "react";
+import './App.css';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faClock } from "@fortawesome/free-regular-svg-icons";
 
-import rest1 from "./assets/json/restaurant1.json";
-import rest2 from "./assets/json/restaurant2.json";
-import rest3 from "./assets/json/restaurant3.json";
-import rest4 from "./assets/json/restaurant4.json";
-import rest5 from "./assets/json/restaurant5.json";
+import Box from './components/Box';
+import Cafeteria from './components/Cafeteria';
+import Logo from './components/Logo';
+
+const UpdateLog = styled.div`
+  margin: 10px 0;
+  font-size: 13px;
+  color: #777;
+`;
 
 function App() {
-	const myArray = [];
-	myArray.push(rest1);
-	myArray.push(rest2);
-	myArray.push(rest3);
-	myArray.push(rest4);
-	myArray.push(rest5);
+  const array = [];
 
-	const newArrayData = myArray.map((item, index) => {
-		const tempValue = parseInt((item.connected / item.capacity) * 100);
-		console.log(item);
-		return (
-			<li key={index} style={{ listStyleType: "none" }}>
-				<Header val={`식당 ${index + 1} `}></Header>
-				<span>{`${item.capacity}명 중 ${item.connected}명   (${tempValue}%)`}</span>
-				<div style={{ display: "inline-block", width: "90%" }}>
-					<Progress
-						value={tempValue}
-						style={{ float: "left" }}
-					></Progress>
-					<span style={{ float: "left", paddingLeft: "10px" }}>
-						<Icon name="user" size={15} strokeWidth={3} />
-						{item.capacity}
-					</span>
-				</div>
-			</li>
-		);
-	});
-	return (
-		<div style={{ marginTop: 40 }}>
-			<div style={{ position: "absolute", left: 343 }}>
-				<Box>최대 인원</Box>
-			</div>
-			<ul>{newArrayData}</ul>
-		</div>
-	);
+  // for(let i = 0; i < 5; i++) {
+  //     array.push(<Box idx={i + 1} />);
+  // }
+
+  return (  
+    <div className="App">
+      {/* <Box idx={2} /> */}
+      {/* {array.map((item) => {
+          return item;
+      })} */}
+      <Logo />
+      <UpdateLog ><FontAwesomeIcon icon={faClock} />&nbsp; 11:00 기준으로 반영된 정보입니다.</UpdateLog>
+      <Cafeteria />
+    </div>
+  );
 }
 
 export default App;
