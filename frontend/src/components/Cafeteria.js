@@ -56,7 +56,7 @@ const Menu = styled.div`
 const Cafeteria = ({idx=1}) => {
     const [info, setInfo] = useState('원활');
     
-    const [value, setValue] = useState(100);
+    const [value, setValue] = useState(90);
     const [color, setColor] = useState('#17a631');
     
 
