@@ -3,19 +3,17 @@ import styled from '@emotion/styled';
 const ProgressContainer = styled.ul`
     position: relative;
     margin: 0;
-    left: 50%;
-    float: left;
-    transform: translateX(-50%);
     list-style-type: none;
     display: flex;
     padding: 0;
+    width: 50%;
 `;
 
 const Rail = styled.li`
     background: #ccc;
     left: 0;
-    width: 22px;
-    height: 15px;
+    width: 100%;
+    height: 10px;
     margin-right: 2px;
 
     &:first-child {
@@ -33,11 +31,11 @@ const Progress3 = ({ value, ...props }) => {
         let railColor = '#ccc';  // 기본 색상(회색)
         let val = Math.ceil(value/10);
         if (val >= index+1) {
-            railColor = '#ffc100'; // 초기색상
+            railColor = '#17a631'; // 초기색상
             if (index > 6) {
-                railColor = '#ff0000'; //ff232f
-            } else if (index > 2) {
-                railColor = '#FA8128';
+                railColor = '#D21404'; // 세번째 색상(빨간색)
+            } else if (index > 3) {
+                railColor = '#fa8735'; // 두번째 색상(노란색)
             }
         }
 
