@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react';
 const BoxDiv = styled.div`
     width: 330px;
     background-color: #f5f5f5;
-    border-raxdius: 10px;
+    border-radius: 10px;
     padding: 10px 0;
     margin-bottom: 20px;
 
