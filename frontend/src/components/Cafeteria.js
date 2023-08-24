@@ -1,8 +1,5 @@
 import styled from '@emotion/styled';
-import Progress from './Progress';
-import Progress2 from './Progress2';
 import Progress3 from './Progress3';
-import Progress4 from './Progress4';
 import { useState, useEffect } from 'react';
 
 const Box = styled.div`
@@ -53,84 +50,111 @@ const Menu = styled.div`
     }
 `;
 
-const Cafeteria = ({idx=1}) => {
-    const [info, setInfo] = useState('원활');
-    
-    const [value, setValue] = useState(90);
-    const [color, setColor] = useState('#17a631');
-    
+const Row1 = styled.div`
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+`;
+
+const Cafeteria = ({idx=2}) => {
+
+    const todayDate = () => {
+        const today = new Date();
+        const year = today.getFullYear();
+        const month = ('0' + (today.getMonth() + 1)).slice(-2);
+        const day = ('0' + today.getDate()).slice(-2);
+        return `${year}${month}${day}`;
+    }
+
+    const [data, setData] = useState([]);
+    const [menuData, setMenuData] = useState([]);
 
     useEffect(() => {
-        if (value >= 66) { 
+        const fetchData = async () => { 
+            const res = await fetch(
+                `http://localhost:8080/get_congestion/restaurant${idx}`,
+                {
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    method: 'GET'
+                }
+            );
+            const result = await res.json();
+            return result;
+        }
+        fetchData().then((data) => {
+            setData(data);
+        });
+
+        const fetchMenuData = async () => { 
+            const res = await fetch(
+                `http://localhost:8080/get_menu/restaurant${idx}/${todayDate()}`,
+                {
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    method: 'GET'
+                }
+            );
+            const result = await res.json();
+            return result;
+        }
+        fetchData().then((data) => {
+            setData(data);
+        });
+        fetchMenuData().then((data) => {
+            setMenuData(data);
+        });
+    }, []);
+
+    const [info, setInfo] = useState('원활');
+    
+    // const [value, setValue] = useState(90);
+    const [color, setColor] = useState('#17a631');
+
+    // useEffect(() => {
+    //     if (value >= 66) { 
+    //         setInfo('혼잡');
+    //         setColor('#D21404');
+    //     } 
+    //     else if (value >= 33) { 
+    //         setInfo('보통'); 
+    //         setColor('#fa8735');
+    //     }
+    // }, [value]);
+    useEffect(() => {
+        if ((data.connected/data.capacity)*100 >= 66) { 
             setInfo('혼잡');
             setColor('#D21404');
         } 
-        else if (value >= 33) { 
+        else if ((data.connected/data.capacity)*100 >= 33) { 
             setInfo('보통'); 
             setColor('#fa8735');
         }
-    }, [value]);
-    
+    }, [data]);
+
     return (
         <div>
             <Box>
-                <Name>{idx}학생회관</Name>
-                <Info style={{color: color}}>{ info }</Info>
-                <Progress value={ value }/>
+                <Row1>
+                    <Name>{idx}학생회관</Name>
+                    <Info style={{color: 'black'}}>{ info }</Info>
+                    <Progress3 value={ (data.connected/data.capacity)*100 }/>
+                </Row1>
+
                 <div style={{width: '100%', display:'flex', flexDirection: 'row'}}>
                     <Menu>
-                        <p>라면</p>
-                        <p>4,500</p>
+                        {menuData[0].menu.map(element => <p key={element}>{element}</p>)}
+                        <p>{menuData[0].price}</p>
                     </Menu>
-                    <Menu>
-                        <p>비빔밥</p>
-                        <p>6,000</p>
-                    </Menu>
-                </div>
-            </Box>
-            <Box>
-                <Name>{idx}학생회관</Name>
-                <Info style={{color: color}}>{ info }</Info>
-                <Progress2 value={ value }/>
-                <div style={{width: '100%', display:'flex', flexDirection: 'row'}}>
-                    <Menu>
-                        <p>김치볶음밥</p>
-                        <p>4,500</p>
-                    </Menu>
-                    <Menu>
-                        <p>비빔밥</p>
-                        <p>6,000</p>
-                    </Menu>
-                </div>
-            </Box>
-            <Box>
-                <Name>{idx}학생회관</Name>
-                <Info style={{color: 'black'}}>{ info }</Info>
-                <Progress3 value={ value }/>
-                <div style={{width: '100%', display:'flex', flexDirection: 'row'}}>
-                    <Menu>
-                        <p>김치볶음밥</p>
-                        <p>4,500</p>
-                    </Menu>
-                    <Menu>
-                        <p>비빔밥</p>
-                        <p>6,000</p>
-                    </Menu>
-                </div>
-            </Box>
-            <Box>
-                <Name>{idx}학생회관</Name>
-                <Info style={{color: 'black'}}>{ info }</Info>
-                <Progress4 value={ value }/>
-                <div style={{width: '100%', display:'flex', flexDirection: 'row'}}>
-                    <Menu>
-                        <p>김치볶음밥</p>
-                        <p>4,500</p>
-                    </Menu>
-                    <Menu>
-                        <p>비빔밥</p>
-                        <p>6,000</p>
-                    </Menu>
+                    {idx === 2 ? //2학일때만
+                        <Menu>
+                            {menuData[0].menu.map(element => <p key={element}>{element}</p>)}
+                            <p>{menuData[1].price}</p>
+                        </Menu>
+                    : null}
                 </div>
             </Box>
         </div>

@@ -21,6 +21,21 @@ function App() {
   //     array.push(<Box idx={i + 1} />);
   // }
 
+  const todayDate = () => {
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = ('0' + (today.getMonth() + 1)).slice(-2);
+    const day = ('0' + today.getDate()).slice(-2);
+    return `${year}${month}${day}`;
+  }
+
+  const menuData = [
+    {
+      'menu': ['미니샤브전골','단무지','김치'],
+      'price': 6000
+    }
+  ]
+
   return (  
     <div className="App">
       {/* <Box idx={2} /> */}
@@ -29,7 +44,10 @@ function App() {
       })} */}
       <Logo />
       <UpdateLog ><FontAwesomeIcon icon={faClock} />&nbsp; 11:00 기준으로 반영된 정보입니다.</UpdateLog>
-      <Cafeteria />
+      todayDate: {todayDate()}
+      {menuData[0].menu.map(element => <p key={element}>{element}</p>)}
+
+      {/* <Cafeteria /> */}
     </div>
   );
 }
