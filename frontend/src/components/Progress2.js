@@ -3,19 +3,17 @@ import styled from '@emotion/styled';
 const ProgressContainer = styled.ul`
     position: relative;
     margin: 0;
-    left: 50%;
-    float: left;
-    transform: translateX(-50%);
     list-style-type: none;
     display: flex;
     padding: 0;
+    width: 50%;
 `;
 
 const Rail = styled.li`
     background: #ccc;
     left: 0;
-    width: 22px;
-    height: 15px;
+    width: 100%;
+    height: 10px;
     margin-right: 2px;
 
     &:first-child {
@@ -32,17 +30,14 @@ const Progress2 = ({ value, ...props }) => {
     let datas = [...Array(10)].map((_, index) => {
         let railColor = '#ccc';  // 기본 색상
         let val = Math.ceil(value/10);
+        console.log(val);
         if (val >= index+1) {
-            if (val >= 9) {
+            if (val > 6) {
                 railColor = '#D21404'; //빨간색
-            } else if (val >= 7) {
-                railColor = '#FA8128';
-            } else if (val >= 5) {
-                railColor = '#FA8128'; //주황색 
-            } else if (val >= 3) {
-                railColor = '#33AA44'; // 노란색
+            } else if (val > 3) {
+                railColor = '#fa8735'; // 노란색
             } else {
-                railColor = '#0eaffd'; // 초록색
+                railColor = '#17a631'; // 초록색
             }
         }
 

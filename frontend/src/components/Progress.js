@@ -5,8 +5,6 @@ const ProgressContainer = styled.div`
     width: 50%;
     height: 16px;
     margin: 0;
-    left: 50%;
-    transform: translateX(-50%);
 `;
 
 const Rail = styled.div`

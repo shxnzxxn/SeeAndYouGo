@@ -29,7 +29,7 @@ const Box = ({ idx }) => {
     useEffect(() => {
         const fetchData = async () => { 
             const res = await fetch(
-                `http://localhost:8080/skj/get_congestion/restaurant${idx}`,
+                `http://localhost:8080/get_congestion/restaurant2`,
                 {
                     headers: {
                         'Content-Type': 'application/json',
@@ -42,6 +42,7 @@ const Box = ({ idx }) => {
         }
         fetchData().then((data) => {
             setData(data);
+            console.log(data)
         });
     }, []);
 
