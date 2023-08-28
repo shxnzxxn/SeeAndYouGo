@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import MyProgress from "./MyProgress";
@@ -24,6 +24,7 @@ const FirstRow = styled.div`
 const CafeteriaName = styled.h2`
 	font-size: 18px;
 	margin-left: 20px;
+	width: 80px;
 
 	::after {
 		content: "";
@@ -35,20 +36,11 @@ const CafeteriaName = styled.h2`
 `;
 
 // 혼잡도 상태 표시
-const StatusString = styled.label`
+// TODO styled 쓸 필요 없어보임
+const Status = styled.span`
 	margin-left: 10px;
 	font-size: 11px;
 `;
-
-const NowStatus = ({ value }) => {
-	if (value < 33) {
-		return <StatusString>원활</StatusString>;
-	} else if (value < 66) {
-		return <StatusString>보통</StatusString>;
-	} else {
-		return <StatusString>혼잡</StatusString>;
-	}
-};
 
 // 2번째 Row (메뉴 이름과 가격 정보)
 const SecondRow = styled.div`
@@ -57,13 +49,21 @@ const SecondRow = styled.div`
 	align-items: center;
 	text-align: center;
 	height: 50%;
+	
+
+	> div:first-of-type {
+		border-right: dashed 1px #d1d1d1;
+	}
+	> div {
+		flex-basis: 50%;
+	}
 `;
 
 // Row 2번째에서의 메뉴 이름과 가격
-const MenuItem = ({ menuName, priceValue }) => {
+const Menu = ({ menuName, priceValue }) => {
 	return (
-		<div style={{ margin: "auto", justifyContent: "center" }}>
-			<p style={{ marginTop: 5, marginBottom: 5 }}>{menuName}</p>
+		<div>
+			<p style={{ marginTop: 5, marginBottom: 5, padding: "0 10px" }}>{menuName}</p>
 			<label
 				style={{
 					color: "#777777",
@@ -77,30 +77,67 @@ const MenuItem = ({ menuName, priceValue }) => {
 	);
 };
 
-// Row 2번째에서의 중간 세로 선
-const VerticalLine = styled.div`
-	width: 1px;
-	height: 80%;
-	border-left: 1.5px dotted #b0b0b0;
-	content: "";
-`;
+// 식당 이름 배열
+const nameList = [
+	"대학생회관", "2학생회관", "3학생회관", "상록회관", "생활과학대", 
+];
 
-const Cafeteria = ({ cafeteriaName, menu, price, value, ...props }) => {
+// props로 cafeteriaName, (menuList1, price1), (menuList2, price2), value를 받아야함
+const Cafeteria = ({ idx, value, ...props }) => {
+	const [status, setStatus] = useState("원활");
+	const [rate, setRate] = useState(value);
+	const [menuData, setMenuData] = useState([]);
+
+	useEffect(() => {
+		if (rate >= 66) {
+			setStatus("혼잡");
+		} else if (rate >= 33) {
+			setStatus("보통");
+		} else {
+			setStatus("원활");
+		}
+		setRate(value);
+
+		const fetchData = async () => {
+			// `/restaurant${idx}`
+			const res = await fetch(`/assets/json/myMenu.json`, {
+				headers: {
+					"Content-Type": "application/json",
+				},
+				method: "GET",
+			});
+			const result = await res.json();
+			return result;
+		};
+		fetchData().then((data) => {
+			setMenuData(data);
+		});
+	}, [value, rate]);
+
 	return (
 		<CafeteriaContainer>
 			<FirstRow>
-				<CafeteriaName>{cafeteriaName}</CafeteriaName>
-				<NowStatus value={value} />
-				<MyProgress value={value} />
+				<CafeteriaName>{nameList[idx-1]}</CafeteriaName>
+
+				<Status>{status}</Status>
+				<MyProgress value={rate} />
+				
 				<FontAwesomeIcon
 					icon={faChevronRight}
-					style={{ color: "#b0b0b0", marginLeft: 10 }}
+					style={{ color: "#b0b0b0", marginLeft: 5 }}
 				/>
+
 			</FirstRow>
 			<SecondRow>
-				<MenuItem menuName={menu} priceValue={price} />
-				<VerticalLine />
-				<MenuItem menuName={menu} priceValue={price} />
+				{menuData.map((val, index) => {
+					return (
+						<Menu
+							key={index}
+							menuName={val.menu[0]}
+							priceValue={val.price}
+						/>
+					);
+				})}
 			</SecondRow>
 		</CafeteriaContainer>
 	);
