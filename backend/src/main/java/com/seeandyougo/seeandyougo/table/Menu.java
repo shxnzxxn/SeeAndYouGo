@@ -2,6 +2,8 @@ package com.seeandyougo.seeandyougo.table;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.stereotype.Repository;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;

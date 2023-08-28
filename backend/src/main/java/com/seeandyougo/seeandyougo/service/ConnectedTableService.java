@@ -1,7 +1,7 @@
-package com.seeandyougo.seeandyougo.skj.service;
+package com.seeandyougo.seeandyougo.service;
 
-import com.seeandyougo.seeandyougo.skj.repository.ConnectedRepository;
-import com.seeandyougo.seeandyougo.skj.table.Connected;
+import com.seeandyougo.seeandyougo.repository.ConnectedRepository;
+import com.seeandyougo.seeandyougo.table.Connected;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

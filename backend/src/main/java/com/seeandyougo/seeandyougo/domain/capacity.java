@@ -1,4 +1,4 @@
-package com.seeandyougo.seeandyougo.skj.domain;
+package com.seeandyougo.seeandyougo.domain;
 
 import lombok.Getter;
 

@@ -1,10 +1,9 @@
-package com.seeandyougo.seeandyougo.skj.repository;
+package com.seeandyougo.seeandyougo.repository;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import com.seeandyougo.seeandyougo.skj.dto.CongestionResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
@@ -15,7 +14,6 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.net.URLEncoder;
 
 @Repository
 @RequiredArgsConstructor

@@ -4,18 +4,16 @@ package com.seeandyougo.seeandyougo.skj.service;
 import com.seeandyougo.seeandyougo.repository.ConnectedRepository;
 import com.seeandyougo.seeandyougo.service.CashService;
 import com.seeandyougo.seeandyougo.service.ConnectedService;
+import com.seeandyougo.seeandyougo.service.ConnectedTableService;
 import com.seeandyougo.seeandyougo.service.MenuService;
 import com.seeandyougo.seeandyougo.service.RawMenuService;
 import com.seeandyougo.seeandyougo.table.Connected;
-import com.seeandyougo.seeandyougo.table.Menu;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
 
 @SpringBootTest
 @Transactional // 테스트에서 이 어노테이션은, 기본적으로 롤백을 해준다.
@@ -35,8 +33,8 @@ class CashServiceTest {
     MenuService menuService;
 
 =======
-import com.seeandyougo.seeandyougo.skj.repository.ConnectedRepository;
-import com.seeandyougo.seeandyougo.skj.table.Connected;
+import ConnectedRepository;
+import Connected;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -46,7 +44,8 @@ import org.springframework.transaction.annotation.Transactional;
 @SpringBootTest
 @Transactional // 테스트에서 이 어노테이션은, 기본적으로 롤백을 해준다.
 class CashServiceTest {
-    @Autowired ConnectedTableService connectedTableService;
+    @Autowired
+    ConnectedTableService connectedTableService;
     @Autowired
     ConnectedRepository connectedRepository;
 

@@ -2,8 +2,6 @@ package com.seeandyougo.seeandyougo.repository;
 
 import com.seeandyougo.seeandyougo.table.Connected;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
@@ -17,24 +15,15 @@ public class ConnectedRepository {
 
     public void save(Connected connected){em.persist(connected);}
 
-    public Connected findRecent(String restaurantName){
+    public List<Connected> findRecent(String restaurantName){
         TypedQuery<Connected> query = em.createQuery(
-                "SELECT connected FROM Connected connected WHERE connected.name LIKE CONCAT('%', :name, '%') AND connected.time = (SELECT MAX(c2.time) FROM Connected c2 WHERE c2.name LIKE CONCAT('%', :name, '%'))",
+                "SELECT ct FROM ConnectedTable ct WHERE ct.time = (SELECT MAX(ct2.time) FROM ConnectedTable ct2 WHERE ct2.name = :name)",
                 Connected.class
         );
+
         query.setParameter("name", restaurantName);
 
-        return query.getSingleResult();
+        return query.getResultList();
     }
-
-
-    public String findRecentTime(){
-        TypedQuery<String> query = em.createQuery(
-                "SELECT MAX(ct2.time) FROM Connected ct2",
-                String.class
-        );
-        return query.getSingleResult();
-    }
-
 
 }

@@ -1,6 +1,6 @@
-package com.seeandyougo.seeandyougo.skj.service;
+package com.seeandyougo.seeandyougo.service;
 
-import com.seeandyougo.seeandyougo.skj.repository.CrowdRepository;
+import com.seeandyougo.seeandyougo.repository.CrowdRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
