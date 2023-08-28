@@ -13,9 +13,9 @@ const Header = () => {
 	return (
 		<HeaderContainer>
 			<img
-				src={"/assets/images/restaurant.png"}
+				src={"/assets/images/logo.png"}
 				alt={"Loading..."}
-				style={{ height: 35, marginRight: 10 }}
+				style={{ height: 40, marginRight: 10 }}
 			/>
 			<h1 style={{ margin: 0 }}>See&YouGo</h1>
 		</HeaderContainer>
