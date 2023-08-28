@@ -1,56 +1,21 @@
-// import styled from '@emotion/styled';
-import React from "react";
 import './App.css';
-// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-// import { faClock } from "@fortawesome/free-regular-svg-icons";
-
-// import Box from './components/Box';
+import React from 'react'
+import Header from './components/Header';
+import UpdateLog from './components/UpdateLog';
 import Cafeteria from './components/Cafeteria';
-// import Logo from './components/Logo';
 
-// const UpdateLog = styled.div`
-//   margin: 10px 0;
-//   font-size: 13px;
-//   color: #777;
-// `;
+// TODO 주석 달기
 
 function App() {
-  // const array = [];
-
-  // for(let i = 0; i < 5; i++) {
-  //     array.push(<Box idx={i + 1} />);
-  // }
-
-  // const todayDate = () => {
-  //   const today = new Date();
-  //   const year = today.getFullYear();
-  //   const month = ('0' + (today.getMonth() + 1)).slice(-2);
-  //   const day = ('0' + today.getDate()).slice(-2);
-  //   return `${year}${month}${day}`;
-  // }
-
-  // const menuData = [
-  //   {
-  //     'menu': ['미니샤브전골','단무지','김치'],
-  //     'price': 6000
-  //   },
-  //   {
-  //     'menu': ['된장국','밥','김치'],
-  //     'price': 4500
-  //   }
-  // ]
+  //TODO 시간 정보가 포함된 식단 인원 정보 request
 
   return (  
-    <div className="App">
-      {/* <Box idx={2} /> */}
-      {/* {array.map((item) => {
-          return item;
-      })} */}
-      {/* <Logo /> */}
-      {/* <UpdateLog ><FontAwesomeIcon icon={faClock} />&nbsp; 11:00 기준으로 반영된 정보입니다.</UpdateLog>
-      todayDate: {todayDate()} */}
-
-      <Cafeteria />
+    <div className='App'>
+      <Header />
+      <UpdateLog updateTime={"11:00"}/>
+      <Cafeteria idx={1} value={98}/>
+      <Cafeteria idx={2} value={45}/>
+      <Cafeteria idx={3} value={9}/>
     </div>
   );
 }
