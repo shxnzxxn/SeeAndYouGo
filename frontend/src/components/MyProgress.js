@@ -1,28 +1,32 @@
 import styled from "@emotion/styled";
 
+// 혼잡도 게이지 표시
 const ColorContainer = styled.div`
 	display: flex;
+	flex-direction: row; // 가로로 나열
+	align-items: center; // 세로 중앙 정렬
 	margin-left: 10px;
-	border: 1px solid #dddddd;
-	border-radius: 5px;
-	overflow: hidden;
 `;
 
 const ColoredDiv = ({ disabledColor, color, index }) => {
 	const divStyle = {
-		float: "left",
-		backgroundColor: disabledColor ? "#FFFFFF" : color,
-		width: "14px",
-		height: "12px",
-		borderLeft:
-			index === 0 ? "none" : disabledColor ? "1px solid #dddddd" : "none",
+		backgroundColor: disabledColor ? "#ffffff" : color,
+		width: "12px",
+		height: "10px",
+		margin: "0.5px",
+		border: "1px solid #dddddd",
+		borderTopLeftRadius: index === 0 ? "5px" : "none",
+		borderBottomLeftRadius: index === 0 ? "5px" : "none",
+		borderTopRightRadius: index === 9 ? "5px" : "none",
+		borderBottomRightRadius: index === 9 ? "5px" : "none",
 	};
 
 	return <div style={divStyle}></div>;
 };
 
+// 투명도 100% 정도 적용한 색상들
 const colors = [
-	"#14F10F",
+	"#05FF00",
 	"#61FF00",
 	"#9EFF00",
 	"#EBFF00",
@@ -40,9 +44,7 @@ const MyProgress = ({ value }) => {
 			{colors.map((color, index) => (
 				<ColoredDiv
 					key={index}
-					disabledColor={
-						index === 0 ? false : Math.round(value / 10) < index + 1
-					}
+					disabledColor={Math.round(value / 10) < index + 1}
 					color={color}
 					index={index}
 				/>
