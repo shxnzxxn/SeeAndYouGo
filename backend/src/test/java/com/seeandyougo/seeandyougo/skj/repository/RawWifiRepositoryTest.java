@@ -1,8 +1,13 @@
 package com.seeandyougo.seeandyougo.skj.repository;
 
+<<<<<<< HEAD
 import com.seeandyougo.seeandyougo.repository.RawWifiRepository;
 import com.seeandyougo.seeandyougo.service.CashService;
 import com.seeandyougo.seeandyougo.service.RawWifiService;
+=======
+import com.seeandyougo.seeandyougo.skj.service.CashService;
+import com.seeandyougo.seeandyougo.skj.service.RawWifiService;
+>>>>>>> main
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -23,7 +28,11 @@ class RawWifiRepositoryTest {
     @Rollback(false)
     public void deleteAll_test() throws Exception {
         // given
+<<<<<<< HEAD
         rawWifiService.saveRawWifiData();
+=======
+//        rawWifiService.saveRawWifiData();
+>>>>>>> main
 
         // when
 //        rawWifiRepository.deleteAll();
