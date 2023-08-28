@@ -1,62 +1,21 @@
 @import url('https://fonts.googleapis.com/css2?family=Jua&display=swap');
-* {font-family: 'Jua', sans-serif;}
-
-/* 기본 body 세팅 
-  width는 총 360px (좌우 padding 고려)
-  padding top은 50px
-  padding 좌우는 30px씩
-  배경색은 회색 #e5e5e5
+/* TODO
+  폰트 여러가지 적용해보기
 */
+* {
+  font-family: 'Jua', sans-serif;
+  box-sizing: border-box;
+}
+
 body {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #E5E5E5;
-  width: 300px;
-  padding: 50px 30px 0 30px;
+  background-color: #eee;
+  width: 360px;
 }
 
 .App {
-  background-color: #fff;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 400px;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+  width: 100%;
+  padding: 40px 30px;
 }

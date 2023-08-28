@@ -4,15 +4,19 @@ import Header from './components/Header';
 import UpdateLog from './components/UpdateLog';
 import Cafeteria from './components/Cafeteria';
 
+// TODO 주석 달기
+
 function App() {
+  //TODO 시간 정보가 포함된 식단 인원 정보 request
+
   return (  
-    <>
+    <div className='App'>
       <Header />
       <UpdateLog updateTime={"11:00"}/>
-      <Cafeteria cafeteriaName={"1학생회관"} menu={"고기알밥"} price={"5300"} value={63}/>
-      <Cafeteria cafeteriaName={"2학생회관"} menu={"특식"} price={"4500"} value={97}/>
-      <Cafeteria cafeteriaName={"3학생회관"} menu={"식사"} price={"6000"} value={30}/>
-    </>
+      <Cafeteria idx={1} value={98}/>
+      <Cafeteria idx={2} value={45}/>
+      <Cafeteria idx={3} value={9}/>
+    </div>
   );
 }
 
