@@ -1,37 +1,25 @@
 import styled from "@emotion/styled";
 
-// 이미지 크기 조절
-const Logo = styled.img`
-	width: 50px;
-	height: 50px;
-	float: left;
-	margin-left: 20px;
+const HeaderContainer = styled.div`
+	width: 100%;
+	padding-top: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 `;
 
-// 타이틀
-const Title = styled.h1`
-	width: 300px;
-	font-size: 30px;
-`;
-
+//TODO 적절한 이미지 찾기
 const Header = () => {
 	return (
-		<div style={{ textAlign: "center" }}>
-			<Logo src={"/assets/images/restaurant.png"} alt="Logo" />
-			<Title>See & You go</Title>
-		</div>
+		<HeaderContainer>
+			<img
+				src={"/assets/images/restaurant.png"}
+				alt={"Loading..."}
+				style={{ height: 35, marginRight: 10 }}
+			/>
+			<h1 style={{ margin: 0 }}>See&YouGo</h1>
+		</HeaderContainer>
 	);
 };
 
 export default Header;
-
-// 로고
-// ${process.env.PUBLIC_URL}/assets/images/restaurant.png 추후에 이렇게 사용될 수도 ?
-// const Logo = () => {
-// 	return (
-// 		<Image
-// 			src={'/assets/images/restaurant.png'}
-// 			alt="Logo"
-// 		/>
-// 	);
-// };
