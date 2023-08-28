@@ -6,11 +6,15 @@ import com.seeandyougo.seeandyougo.service.ConnectedService;
 import com.seeandyougo.seeandyougo.service.MenuService;
 import com.seeandyougo.seeandyougo.service.RawMenuService;
 import com.seeandyougo.seeandyougo.table.Connected;
+import com.seeandyougo.seeandyougo.table.Menu;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.ResponseEntity;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @SpringBootTest
 @Transactional // 테스트에서 이 어노테이션은, 기본적으로 롤백을 해준다.
@@ -56,7 +60,7 @@ class CashServiceTest {
         connected3.setTime("2023-08-20 22:30:49");
         connected3.setConnected(4);
         connectedRepository.save(connected3);
-        // when
+       // when
 
         // then
 
