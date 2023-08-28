@@ -35,7 +35,7 @@ public class SKJ_CongestionController {
     public ResponseEntity<CongestionResponse> congestionRequest(@PathVariable("restaurant") String place) throws Exception {
         String[] str = place.split("");
         String name = str[place.length()-1];
-        String placeName = "\""+name+"학생회관\"";
+        String placeName = name+"학생회관";
         CongestionResponse congestionResponse = new CongestionResponse();
 
         Connected recentConnected = connectedService.getRecentConnected(placeName);
