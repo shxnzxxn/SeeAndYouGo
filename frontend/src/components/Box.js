@@ -22,6 +22,8 @@ const Capacity = styled.p`
     float: left;
 `;
 
+
+
 const Box = ({ idx }) => {
 
     const [data, setData] = useState([]);
@@ -45,6 +47,41 @@ const Box = ({ idx }) => {
             console.log(data)
         });
     }, []);
+    
+//   const [data, setData] = useState([]);
+
+//   useEffect(() => {
+//     const restaurantIds = ['restaurant2', 'restaurant3', 'restaurant4'];
+
+//       const fetchData = async (restaurantId) => { 
+//           const res = await fetch(
+//               `http://localhost:8080/get_congestion/${restaurantId}`,
+//               {
+//                   headers: {
+//                       'Content-Type': 'application/json',
+//                   },
+//                   method: 'GET'
+//               }
+//           );
+//           const result = await res.json();
+//           return result;
+//       }
+
+//       const fetchDataRestaurant = async () => {
+//         const restaurantData = [];
+
+//         for (const restaurantId of restaurantIds) {
+//           const dataForRestaurant = await fetchData(restaurantId);
+//           restaurantData.push(dataForRestaurant);
+//         }
+
+//         return restaurantData;
+//       }
+//       fetchDataRestaurant().then((data) => {
+//           setData(data);
+//           console.log(data)
+//       });
+//   }, []);
 
     return (
         <BoxDiv>
