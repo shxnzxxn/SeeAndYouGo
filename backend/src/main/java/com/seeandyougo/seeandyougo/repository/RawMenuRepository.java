@@ -1,10 +1,8 @@
-package com.seeandyougo.seeandyougo.skj.repository;
+package com.seeandyougo.seeandyougo.repository;
 
-import com.seeandyougo.seeandyougo.skj.table.RawMenu;
-import com.seeandyougo.seeandyougo.skj.table.RawWifi;
+import com.seeandyougo.seeandyougo.table.RawMenu;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
-
 import javax.persistence.EntityManager;
 import java.util.List;
 
@@ -25,5 +23,4 @@ public class RawMenuRepository {
     public void deleteAll(){
         em.createQuery("DELETE FROM RawMenu").executeUpdate();
     }
-
 }

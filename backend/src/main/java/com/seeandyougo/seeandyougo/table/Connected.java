@@ -1,16 +1,17 @@
-package com.seeandyougo.seeandyougo.skj.table;
+package com.seeandyougo.seeandyougo.table;
 
 import lombok.Getter;
 import lombok.Setter;
-
 import javax.persistence.*;
 
 @Entity
 @Getter @Setter
-public class Capacity {
+public class Connected {
+
     @Id @GeneratedValue
     private Long id;
 
     private String name;
-    private Integer capacity;
+    private String time;
+    private Integer connected;
 }

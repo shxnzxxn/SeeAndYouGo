@@ -1,9 +1,8 @@
-package com.seeandyougo.seeandyougo.skj.service;
+package com.seeandyougo.seeandyougo.service;
 
-import com.seeandyougo.seeandyougo.skj.repository.RawWifiRepository;
-import com.seeandyougo.seeandyougo.skj.table.RawWifi;
+import com.seeandyougo.seeandyougo.repository.RawWifiRepository;
+import com.seeandyougo.seeandyougo.table.RawWifi;
 import lombok.RequiredArgsConstructor;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,7 +19,7 @@ public class RawWifiService { //
     private final RawWifiRepository rawWifiRepository;
 
     @Transactional
-    @Scheduled(fixedDelay = 2000, initialDelay = 2000)
+//    @Scheduled(fixedDelay = 2000, initialDelay = 2000)
     public void saveRawWifiData() throws Exception{
 
         String apiUrl = "http://localhost:3000/svc/offcam/pub/WifiAllInfo?AUTH_KEY=efefef"; // API 엔드포인트

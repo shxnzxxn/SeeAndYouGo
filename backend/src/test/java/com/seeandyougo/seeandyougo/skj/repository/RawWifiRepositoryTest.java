@@ -1,7 +1,8 @@
 package com.seeandyougo.seeandyougo.skj.repository;
 
-import com.seeandyougo.seeandyougo.skj.service.CashService;
-import com.seeandyougo.seeandyougo.skj.service.RawWifiService;
+import com.seeandyougo.seeandyougo.repository.RawWifiRepository;
+import com.seeandyougo.seeandyougo.service.CashService;
+import com.seeandyougo.seeandyougo.service.RawWifiService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

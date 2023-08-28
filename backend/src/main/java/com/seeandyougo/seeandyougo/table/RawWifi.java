@@ -1,7 +1,7 @@
-package com.seeandyougo.seeandyougo.skj.table;
+package com.seeandyougo.seeandyougo.table;
+
 import lombok.Getter;
 import lombok.Setter;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,7 +14,7 @@ public class RawWifi {
     @Id @GeneratedValue
     private Long id;
 
-    @Column(length = 1000)
+    @Column(length = 65535) // 65535 : 테이블에 삽입할 수 있는 문자열 최대 길이
     private String raw;
 
 }

@@ -1,4 +1,4 @@
-package com.seeandyougo.seeandyougo.skj.dto;
+package com.seeandyougo.seeandyougo.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -8,7 +8,6 @@ import lombok.Setter;
 @Getter @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class CongestionResponse {
-    private Integer capacity;
-    private Integer connected;
+public class TimeResponse {
+    private String dateTime;
 }

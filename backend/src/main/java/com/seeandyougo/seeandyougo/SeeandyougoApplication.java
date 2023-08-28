@@ -9,5 +9,4 @@ public class SeeandyougoApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(SeeandyougoApplication.class, args);
 	}
-
 }
