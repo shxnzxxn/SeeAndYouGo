@@ -22,12 +22,13 @@ public class MenuRepository {
 
     public List<Menu> findMenusByNameAndDate(String name, String date) {
         TypedQuery<Menu> query = em.createQuery(
-                "SELECT m FROM Menu m WHERE m.name = :name AND m.date = :date",
+                "SELECT m FROM Menu m WHERE m.name LIKE CONCAT('%', :name, '%') AND m.date = :date AND m.type = :type",
                 Menu.class
         );
 
         query.setParameter("name", name);
         query.setParameter("date", date);
+        query.setParameter("type", "중식");
 
         return query.getResultList();
     }

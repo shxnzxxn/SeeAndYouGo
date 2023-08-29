@@ -5,7 +5,6 @@ import com.seeandyougo.seeandyougo.dto.MenuResponse;
 import com.seeandyougo.seeandyougo.dto.TimeResponse;
 import com.seeandyougo.seeandyougo.service.*;
 import com.seeandyougo.seeandyougo.table.Connected;
-import com.seeandyougo.seeandyougo.table.Menu;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -57,7 +56,10 @@ public class SKJ_CongestionController {
     @GetMapping("/get_menu/{restaurant}/{date}")
     public ResponseEntity<List<MenuResponse>> todayMenuRequest(
             @PathVariable("restaurant") String place, @PathVariable("date") String date){
-        return ResponseEntity.ok(menuService.getRestaurantMenu(place, date));
+        String[] str = place.split("");
+        String name = str[place.length()-1];
+        String placeName = name+"학생회관";
+        return ResponseEntity.ok(menuService.getRestaurantMenu(placeName, date));
     }
 
     @GetMapping("/getRawWifi")

@@ -14,7 +14,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -121,6 +120,18 @@ public class CashService {
                 String type = menuObject.get("FOOM_DIV_NM").getAsString();
                 String menu = menuObject.get("MENU_KORN_NM").getAsString();
 
+                if(name.contains("1학생회관")){
+                    name = "1학생회관";
+                }else if(name.contains("2학생회관")){
+                    name = "2학생회관";
+                }else if(name.contains("3학생회관")){
+                    name = "3학생회관";
+                }else if(name.contains("4학생회관")){
+                    name = "4학생회관";
+                }else if(name.contains("생활과학대학")) {
+                    name = "5학생회관";
+                }
+
                 String priceStr = menuObject.get("MENU_PRC").getAsString();
                 Integer price = new Integer(0);
                 if(priceStr.length()!=0){
@@ -167,6 +178,18 @@ public class CashService {
                 String dept = menuObject.get("CAFE_DTL_DIV_NM").getAsString();
                 String type = menuObject.get("FOOM_DIV_NM").getAsString();
                 String menu = menuObject.get("MENU_KORN_NM").getAsString();
+
+                if(name.contains("1학생회관")){
+                    name = "1학생회관";
+                }else if(name.contains("2학생회관")){
+                    name = "2학생회관";
+                }else if(name.contains("3학생회관")){
+                    name = "3학생회관";
+                }else if(name.contains("4학생회관")){
+                    name = "4학생회관";
+                }else if(name.contains("생활과학대학")) {
+                    name = "5학생회관";
+                }
 
                 String priceStr = menuObject.get("MENU_PRC").getAsString();
                 Integer price = new Integer(0);

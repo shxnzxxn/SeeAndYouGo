@@ -9,6 +9,7 @@ import javax.persistence.*;
 public class Connected {
 
     @Id @GeneratedValue
+    @Column(name = "connected_id")
     private Long id;
 
     private String name;
