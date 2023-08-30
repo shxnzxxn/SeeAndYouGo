@@ -21,8 +21,8 @@ const FirstRow = styled.div`
 `;
 
 // 식당 이름 표시
-const CafeteriaName = styled.h2`
-	font-size: 18px;
+const CafeteriaName = styled.p`
+    font-weight: 700;
 	margin-left: 20px;
 	width: 80px;
 
@@ -57,12 +57,14 @@ const SecondRow = styled.div`
 const Menu = ({ menuName, priceValue }) => {
     return (
         <div>
-            <p style={{ marginTop: 5, marginBottom: 5, padding: "0 10px" }}>{menuName}</p>
+            <p style={{ marginTop: 5, marginBottom: 5, padding: "0 10px", fontWeight:500, fontSize: 14 }}>{menuName}</p>
             <label
                 style={{
                     color: "#777777",
                     marginTop: 5,
                     marginBottom: 5,
+                    fontWeight: 300,
+                    fontSize: 12
                 }}
             >
                 {priceValue}
@@ -73,7 +75,7 @@ const Menu = ({ menuName, priceValue }) => {
 
 // 식당 이름 배열
 const nameList = [
-    "대학생회관", "2학생회관", "3학생회관", "상록회관", "생활과학대",
+    "학생회관", "2학생회관", "3학생회관", "상록회관", "생활과학대",
 ];
 
 // props로 cafeteriaName, (menuList1, price1), (menuList2, price2), value를 받아야함

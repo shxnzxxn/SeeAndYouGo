@@ -17,7 +17,7 @@ const Header = () => {
 				alt={"Loading..."}
 				style={{ height: 40, marginRight: 10 }}
 			/>
-			<h1 style={{ margin: 0 }}>See&YouGo</h1>
+			<h1 style={{ margin: 0, fontFamily:'Jua' }}>See&YouGo</h1>
 		</HeaderContainer>
 	);
 };
