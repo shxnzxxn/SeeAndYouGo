@@ -12,14 +12,17 @@ const UpdateLogContainer = styled.div`
 `;
 
 const UpdateLog = ({ updateTime }) => {
+	// YYYY-MM-DD HH:MM:SS 형태
+	const nowTime = updateTime.split(" ")[1].split(":").slice(0, 2).join(":");
 	return (
 		<UpdateLogContainer>
 			<FontAwesomeIcon icon={faClock} />
 			<label style={{ marginLeft: 5 }}>
-				{updateTime} 기준으로 반영된 정보입니다.
+				{nowTime} 기준으로 반영된 정보입니다.
 			</label>
 		</UpdateLogContainer>
 	);
 };
+
 
 export default UpdateLog;

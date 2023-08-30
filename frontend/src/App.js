@@ -15,6 +15,7 @@ function App() {
 		const jsonFilePaths = [
 			"assets/json/restaurant1.json",
 			"assets/json/restaurant2.json",
+      "assets/json/restaurant3.json"
 		];
 
 		// 여러 JSON 파일 가져오기
@@ -23,10 +24,7 @@ function App() {
 				fetch(path).then((response) => response.json())
 			)
 		)
-			.then((dataArray) => {
-        console.log(dataArray)
-        setRestaurantData(dataArray)
-      })
+			.then((dataArray) => setRestaurantData(dataArray))
 			.catch((error) => console.error("Error fetching JSON:", error));
 	}, []); // 빈 배열을 넘겨주면 컴포넌트가 마운트될 때 한 번만 실행
 

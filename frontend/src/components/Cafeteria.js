@@ -21,8 +21,8 @@ const FirstRow = styled.div`
 `;
 
 // 식당 이름 표시
-const CafeteriaName = styled.p`
-    font-weight: 700;
+const CafeteriaName = styled.h2`
+	font-size: 16px;
 	margin-left: 20px;
 	width: 80px;
 
@@ -57,14 +57,14 @@ const SecondRow = styled.div`
 const Menu = ({ menuName, priceValue }) => {
     return (
         <div>
-            <p style={{ marginTop: 5, marginBottom: 5, padding: "0 10px", fontWeight:500, fontSize: 14 }}>{menuName}</p>
+            <p style={{ marginTop: 5, marginBottom: 5, padding: "0 10px", fontWeight:500, fontSize:14}}>{menuName}</p>
             <label
                 style={{
                     color: "#777777",
                     marginTop: 5,
                     marginBottom: 5,
                     fontWeight: 300,
-                    fontSize: 12
+                    fontSize: 12,
                 }}
             >
                 {priceValue}
@@ -114,7 +114,7 @@ const Cafeteria = ({ idx, value, ...props }) => {
         <CafeteriaContainer>
             <FirstRow>
                 <CafeteriaName>{nameList[idx - 1]}</CafeteriaName>
-                <span style={{ fontSize: 11, marginLeft: 10 }}>{status}</span>
+                <span style={{ fontWeight:500, fontSize: 11, marginLeft: 10 }}>{status}</span>
                 <MyProgress value={rate} />
                 <FontAwesomeIcon
                     icon={faChevronRight}
