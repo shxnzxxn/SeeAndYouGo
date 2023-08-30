@@ -8,6 +8,7 @@ import javax.persistence.*;
 @Getter @Setter
 public class Capacity {
     @Id @GeneratedValue
+    @Column(name = "capacity_id")
     private Long id;
 
     private String name;
