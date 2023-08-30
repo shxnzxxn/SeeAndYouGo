@@ -17,11 +17,12 @@ const UpdateLog = ({ updateTime }) => {
 	return (
 		<UpdateLogContainer>
 			<FontAwesomeIcon icon={faClock} />
-			<label style={{ marginLeft: 5, fontWeight:400 }}>
+			<label style={{ marginLeft: 5 }}>
 				{nowTime} 기준으로 반영된 정보입니다.
 			</label>
 		</UpdateLogContainer>
 	);
 };
+
 
 export default UpdateLog;

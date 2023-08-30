@@ -75,7 +75,7 @@ const Menu = ({ menuName, priceValue }) => {
 
 // 식당 이름 배열
 const nameList = [
-    "대학생회관", "2학생회관", "3학생회관", "상록회관", "생활과학대",
+    "학생회관", "2학생회관", "3학생회관", "상록회관", "생활과학대",
 ];
 
 // props로 cafeteriaName, (menuList1, price1), (menuList2, price2), value를 받아야함
