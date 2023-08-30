@@ -48,17 +48,8 @@ public class CashService {
         for (JsonElement element : resultArray) {
             JsonObject entry = element.getAsJsonObject();
             String location = entry.get("location").getAsString().split("-")[0];
-            if(location.contains("1학생회관")){
-                location = "1학생회관";
-            }else if(location.contains("2학생회관")){
-                location = "2학생회관";
-            }else if(location.contains("3학생회관")){
-                location = "3학생회관";
-            }else if(location.contains("4학생회관")){
-                location = "4학생회관";
-            }else if(location.contains("생활과학대학")) {
-                location = "5학생회관";
-            }
+
+            location = changeRestaurantName(location);
 
             int client = entry.get("client").getAsInt();
 
@@ -120,17 +111,7 @@ public class CashService {
                 String type = menuObject.get("FOOM_DIV_NM").getAsString();
                 String menu = menuObject.get("MENU_KORN_NM").getAsString();
 
-                if(name.contains("1학생회관")){
-                    name = "1학생회관";
-                }else if(name.contains("2학생회관")){
-                    name = "2학생회관";
-                }else if(name.contains("3학생회관")){
-                    name = "3학생회관";
-                }else if(name.contains("4학생회관")){
-                    name = "4학생회관";
-                }else if(name.contains("생활과학대학")) {
-                    name = "5학생회관";
-                }
+                name = changeRestaurantName(name);
 
                 String priceStr = menuObject.get("MENU_PRC").getAsString();
                 Integer price = new Integer(0);
@@ -179,17 +160,7 @@ public class CashService {
                 String type = menuObject.get("FOOM_DIV_NM").getAsString();
                 String menu = menuObject.get("MENU_KORN_NM").getAsString();
 
-                if(name.contains("1학생회관")){
-                    name = "1학생회관";
-                }else if(name.contains("2학생회관")){
-                    name = "2학생회관";
-                }else if(name.contains("3학생회관")){
-                    name = "3학생회관";
-                }else if(name.contains("4학생회관")){
-                    name = "4학생회관";
-                }else if(name.contains("생활과학대학")) {
-                    name = "5학생회관";
-                }
+                name = changeRestaurantName(name);
 
                 String priceStr = menuObject.get("MENU_PRC").getAsString();
                 Integer price = new Integer(0);
@@ -241,5 +212,14 @@ public class CashService {
         }
 
         return new ArrayList<>(responseMap.values());
+    }
+
+    private String changeRestaurantName(String name){
+        if(name.contains("1학생회관")) name= "1학생회관";
+        else if(name.contains("2학생회관")) name= "2학생회관";
+        else if(name.contains("3학생회관")) name= "3학생회관";
+        else if(name.contains("4학생회관")) name= "상록회관";
+        else if(name.contains("생활과학대학")) name= "생활과학대";
+        return name;
     }
 }
