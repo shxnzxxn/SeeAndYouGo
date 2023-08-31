@@ -17,7 +17,7 @@ services:
       MYSQL_PASSWORD: seeandyougo
       TZ: 'Asia/Seoul'
     ports:
-      - "3306:3306"
+      - "3307:3306"
 #    volumes:
 #      - ./mysql/conf.d:/etc/mysql/conf.d # MySQL 설정 파일 위치
     command:
@@ -29,7 +29,7 @@ services:
       - db-net
   seeandyougo:
     container_name: seeandyougo
-    build: . # Dockerfile과 Docker compose가 같은 위치에 있으므로, Dockercompose 기준 현재 디렉토리에서 Dockerfile을 찾는다.
+    build: ./backend # Dockerfile과 Docker compose가 같은 위치에 있으므로, Dockercompose 기준 현재 디렉토리에서 Dockerfile을 찾는다.
     restart: on-failure
     ports:
       - 8080:8080
@@ -39,5 +39,31 @@ services:
 #      - .:/app
     depends_on:
       - mysql
+      - wifi-dummy-api
+    environment:
+      - TZ=Asia/Seoul
+  nginx:
+    container_name: nginx
+    image: shingyeongjun/nginx:latest
+    restart: always
+    ports: 
+      - "80:80/tcp"
+      - "443:443"
+    volumes:
+      - ./default.conf:/etc/nginx/conf.d/default.conf
+    networks:
+      - db-net
+    environment:
+      - TZ=Asia/Seoul
+    depends_on:
+      - seeandyougo
+  wifi-dummy-api:
+    container_name: wifi-dummy-api
+    image: shingyeongjun/wifi-dummy-api:latest
+    restart: always
+    ports: 
+      - 3030:8080
+    networks:
+      - db-net
     environment:
       - TZ=Asia/Seoul
