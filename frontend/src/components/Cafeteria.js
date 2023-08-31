@@ -1,4 +1,6 @@
 import styled from "@emotion/styled";
+import { css, keyframes } from '@emotion/react'
+
 import React, { useEffect, useState } from "react";
 import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -21,17 +23,17 @@ const FirstRow = styled.div`
 `;
 
 // 식당 이름 표시
-const CafeteriaName = styled.h2`
-	font-size: 16px;
-	margin-left: 20px;
-	width: 80px;
+const CafeteriaName = styled.p`
+    margin-right: 10px;
+    font-size: 15px;
+    margin-left: 20px;
 
 	::after {
 		content: "";
 		display: block;
 		width: 50px;
 		border-bottom: 3px solid #000000;
-		margin: 3px 0 0 8px;
+        margin: auto;
 	}
 `;
 
@@ -53,11 +55,61 @@ const SecondRow = styled.div`
 	}
 `;
 
+const MenuName = styled.p`
+    margin: 5px 0;
+    font-weight: 500;
+    font-size: 14px;
+
+    width: 100%;
+    text-align: center;
+`;
+
+const SliderContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+    height: 20px;
+    overflow: hidden;
+`;
+
+const SlideItem = styled.div`
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+`;
+
 // Row 2번째에서의 메뉴 이름과 가격
 const Menu = ({ menuName, priceValue }) => {
+
+    const [currentIndex, setCurrentIndex] = useState(0);
+    const animationDuration = 1; // 슬라이드 간격(초)
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setCurrentIndex((prevIndex) => (prevIndex + 1) % menuName.length);
+        }, animationDuration * 1000);
+
+        return () => clearInterval(interval);
+    }, [menuName.length]);
+
     return (
         <div>
-            <p style={{ marginTop: 5, marginBottom: 5, padding: "0 10px", fontWeight:500, fontSize:14}}>{menuName}</p>
+            <SliderContainer>
+                {menuName.map((name, idx) => (
+                    <SlideItem
+                        key={idx}
+                        animationDuration={animationDuration}
+                        style={{
+                            transform: `translateY(-${currentIndex * 100}%))`
+                            // transform: `translateY(${((idx - currentIndex + menuName.length * 2) % menuName.length) * 100}%)`,
+                        }}
+                    >
+                        <MenuName>{name}</MenuName>
+                    </SlideItem>
+                ))}
+            </SliderContainer>
+            {/* {menuName.map((name, idx) => <MenuName>{name}</MenuName>)} */}
             <label
                 style={{
                     color: "#777777",
@@ -75,7 +127,7 @@ const Menu = ({ menuName, priceValue }) => {
 
 // 식당 이름 배열
 const nameList = [
-    "학생회관", "2학생회관", "3학생회관", "상록회관", "생활과학대",
+    "1학생회관", "2학생회관", "3학생회관", "상록회관", "생활과학대",
 ];
 
 // props로 cafeteriaName, (menuList1, price1), (menuList2, price2), value를 받아야함
@@ -114,11 +166,11 @@ const Cafeteria = ({ idx, value, ...props }) => {
         <CafeteriaContainer>
             <FirstRow>
                 <CafeteriaName>{nameList[idx - 1]}</CafeteriaName>
-                <span style={{ fontWeight:500, fontSize: 11, marginLeft: 10 }}>{status}</span>
+                <span style={{ fontWeight:500, fontSize: 11}}>{status}</span>
                 <MyProgress value={rate} />
                 <FontAwesomeIcon
                     icon={faChevronRight}
-                    style={{ color: "#b0b0b0", marginLeft: 5 }}
+                    style={{ color: "#b0b0b0", marginLeft: 5, marginRight:10  }}
                 />
             </FirstRow>
             <SecondRow>
@@ -126,7 +178,7 @@ const Cafeteria = ({ idx, value, ...props }) => {
                     return (
                         <Menu
                             key={index}
-                            menuName={val.menu[0]}
+                            menuName={val.menu}
                             priceValue={val.price}
                         />
                     );
