@@ -11,18 +11,18 @@ const UpdateLogContainer = styled.div`
 	padding: 2px;
 `;
 
+// updateTime은 'YYYY-MM-DD HH:MM:SS' 형태
+// 전달받은 updateTime 값에서 시간:분 형태로 추출하여 표시
 const UpdateLog = ({ updateTime }) => {
-	// YYYY-MM-DD HH:MM:SS 형태
 	const nowTime = updateTime.split(" ")[1].split(":").slice(0, 2).join(":");
 	return (
 		<UpdateLogContainer>
 			<FontAwesomeIcon icon={faClock} />
-			<label style={{ marginLeft: 5 }}>
+			<label style={{ marginLeft: 5, fontWeight: 400 }}>
 				{nowTime} 기준으로 반영된 정보입니다.
 			</label>
 		</UpdateLogContainer>
 	);
 };
-
 
 export default UpdateLog;
