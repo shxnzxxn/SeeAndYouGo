@@ -1,11 +1,11 @@
+@import url('https://webfontworld.github.io/SCoreDream/SCoreDream.css');
 @import url('https://fonts.googleapis.com/css2?family=Jua&display=swap');
 
-/* TODO
-  폰트 여러가지 적용해보기
-*/
 * {
-  font-family: 'Jua', sans-serif;
+  font-family: 'SCoreDream', sans-serif;
+  font-family: 'SCoreDream';
   box-sizing: border-box;
+  font-weight: 700;
 }
 
 body {

@@ -21,17 +21,18 @@ const FirstRow = styled.div`
 `;
 
 // 식당 이름 표시
-const CafeteriaName = styled.h2`
-	font-size: 18px;
+const CafeteriaName = styled.p`
+	font-size: 15px;
 	margin-left: 20px;
-	width: 80px;
+	font-weight: 700;
 
 	::after {
 		content: "";
 		display: block;
 		width: 50px;
 		border-bottom: 3px solid #000000;
-		margin: 3px 0 0 8px;
+		margin: 0 auto;
+		padding-top: 2px;
 	}
 `;
 
@@ -41,97 +42,152 @@ const SecondRow = styled.div`
 	justify-content: center;
 	align-items: center;
 	text-align: center;
-	height: 60%;
+	height: 65%;
 
 	> div {
-        border-left: dashed 1.5px #d1d1d1;
+		border-left: dashed 1.5px #d1d1d1;
 		flex-basis: 50%;
 	}
 
-    > div:first-of-type {
+	> div:first-of-type {
 		border-left: none;
 	}
 `;
 
+const MenuSlider = styled.div`
+	padding-bottom: 5px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	overflow: hidden;
+`;
+
+const MenuItem = styled.p`
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 14px;
+	font-weight: 500;
+	position: absolute;
+	transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
+	opacity: 0;
+	transform: translateY(100%);
+
+	${({ active }) =>
+		active &&
+		`
+        opacity: 1;
+        transform: translateY(0);
+    `}
+`;
+
+// 메뉴 이름 1.5초마다 변경되어 표시
+const MenuList = ({ nowList }) => {
+	const [currentIndex, setCurrentIndex] = useState(0);
+
+	useEffect(() => {
+		const interval = setInterval(() => {
+			setCurrentIndex((prevIndex) => (prevIndex + 1) % nowList.length);
+		}, 1500); // 1.5초마다 변경
+
+		return () => clearInterval(interval);
+	}, [nowList.length, currentIndex]);
+
+	return (
+		<MenuSlider>
+			{nowList.map((item, index) => (
+				<MenuItem key={index} active={index === currentIndex}>
+					{item}
+				</MenuItem>
+			))}
+		</MenuSlider>
+	);
+};
+
+// 메뉴 가격 표시
+const Price = styled.label`
+	color: "#777777";
+	margin: 5px 0;
+	font-size: 12px;
+	font-weight: 300;
+`;
+
 // Row 2번째에서의 메뉴 이름과 가격
 const Menu = ({ menuName, priceValue }) => {
-    return (
-        <div>
-            <p style={{ marginTop: 5, marginBottom: 5, padding: "0 10px" }}>{menuName}</p>
-            <label
-                style={{
-                    color: "#777777",
-                    marginTop: 5,
-                    marginBottom: 5,
-                }}
-            >
-                {priceValue}
-            </label>
-        </div>
-    );
+	return (
+		<div>
+			<MenuList nowList={menuName} />
+			<Price>{priceValue}</Price>
+		</div>
+	);
 };
 
 // 식당 이름 배열
 const nameList = [
-    "대학생회관", "2학생회관", "3학생회관", "상록회관", "생활과학대",
+	"1학생회관",
+	"2학생회관",
+	"3학생회관",
+	"상록회관",
+	"생활과학대",
 ];
 
-// props로 cafeteriaName, (menuList1, price1), (menuList2, price2), value를 받아야함
-const Cafeteria = ({ idx, value, ...props }) => {
-    const [status, setStatus] = useState("원활");
-    const [rate, setRate] = useState(value);
-    const [menuData, setMenuData] = useState([]);
+const Cafeteria = ({ idx, value }) => {
+	const [status, setStatus] = useState("원활");
+	const [rate, setRate] = useState(value);
+	const [menuData, setMenuData] = useState([]);
 
-    useEffect(() => {
-        if (rate >= 66) {
-            setStatus("혼잡");
-        } else if (rate >= 33) {
-            setStatus("보통");
-        } else {
-            setStatus("원활");
-        }
-        setRate(value);
+	useEffect(() => {
+		if (rate >= 66) {
+			setStatus("혼잡");
+		} else if (rate >= 33) {
+			setStatus("보통");
+		} else {
+			setStatus("원활");
+		}
+		setRate(value);
 
-        const fetchData = async () => {
-            // `/restaurant${idx}`
-            const res = await fetch(`/assets/json/myMenu.json`, {
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                method: "GET",
-            });
-            const result = await res.json();
-            return result;
-        };
-        fetchData().then((data) => {
-            setMenuData(data);
-        });
-    }, [value, rate]);
+		const fetchData = async () => {
+			// "http:localhost:8080/get_menu/{name}/{date}"
+			const res = await fetch(`/assets/json/myMenu.json`, {
+				headers: {
+					"Content-Type": "application/json",
+				},
+				method: "GET",
+			});
+			const result = await res.json();
+			return result;
+		};
+		fetchData().then((data) => {
+			setMenuData(data);
+		});
+	}, [value, rate]);
 
-    return (
-        <CafeteriaContainer>
-            <FirstRow>
-                <CafeteriaName>{nameList[idx - 1]}</CafeteriaName>
-                <span style={{ fontSize: 11, marginLeft: 10 }}>{status}</span>
-                <MyProgress value={rate} />
-                <FontAwesomeIcon
-                    icon={faChevronRight}
-                    style={{ color: "#b0b0b0", marginLeft: 5 }}
-                />
-            </FirstRow>
-            <SecondRow>
-                {menuData.map((val, index) => {
-                    return (
-                        <Menu
-                            key={index}
-                            menuName={val.menu[0]}
-                            priceValue={val.price}
-                        />
-                    );
-                })}
-            </SecondRow>
-        </CafeteriaContainer>
-    );
+	return (
+		<CafeteriaContainer>
+			<FirstRow>
+				<CafeteriaName>{nameList[idx - 1]}</CafeteriaName>
+				<span style={{ fontWeight: 500, fontSize: 11, marginLeft: 10 }}>
+					{status}
+				</span>
+				<MyProgress value={rate} />
+				<FontAwesomeIcon
+					icon={faChevronRight}
+					style={{ color: "#b0b0b0", marginLeft: 10 }}
+				/>
+			</FirstRow>
+			<SecondRow>
+				{menuData.map((val, index) => {
+					return (
+						<Menu
+							key={index}
+							menuName={val.menu}
+							priceValue={val.price}
+						/>
+					);
+				})}
+			</SecondRow>
+		</CafeteriaContainer>
+	);
 };
 
 export default Cafeteria;

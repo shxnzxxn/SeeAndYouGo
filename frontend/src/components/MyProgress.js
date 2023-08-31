@@ -34,6 +34,7 @@ const colors = [
 	"#FF0000",
 ];
 
+// 입력받은 value값을 기준으로 색상을 표시
 const MyProgress = ({ value }) => {
 	return (
 		<ColorContainer>

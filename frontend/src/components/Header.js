@@ -8,7 +8,7 @@ const HeaderContainer = styled.div`
 	justify-content: center;
 `;
 
-//TODO 적절한 이미지 찾기
+// 이미지와 로고 표시
 const Header = () => {
 	return (
 		<HeaderContainer>
@@ -17,7 +17,7 @@ const Header = () => {
 				alt={"Loading..."}
 				style={{ height: 40, marginRight: 10 }}
 			/>
-			<h1 style={{ margin: 0 }}>See&YouGo</h1>
+			<h1 style={{ margin: 0, fontFamily: "Jua" }}>See&YouGo</h1>
 		</HeaderContainer>
 	);
 };
