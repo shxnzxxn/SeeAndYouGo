@@ -8,7 +8,7 @@ const HeaderContainer = styled.div`
 	justify-content: center;
 `;
 
-//TODO 적절한 이미지 찾기
+// 이미지와 로고 표시
 const Header = () => {
 	return (
 		<HeaderContainer>

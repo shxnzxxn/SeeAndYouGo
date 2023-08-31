@@ -1,22 +1,26 @@
-import './App.css';
 import React, { useEffect, useState } from "react";
-import Header from './components/Header';
-import UpdateLog from './components/UpdateLog';
-import Cafeteria from './components/Cafeteria';
+import Header from "./components/Header";
+import UpdateLog from "./components/UpdateLog";
+import Cafeteria from "./components/Cafeteria";
+import "./App.css";
 
-// TODO 주석 달기
-
+// 시간 정보가 포함된 식단 인원 정보 request
 function App() {
-  //TODO 시간 정보가 포함된 식단 인원 정보 request
-  const [restaurantData, setRestaurantData] = useState([]);
+	const [restaurantData, setRestaurantData] = useState([]);
 
 	useEffect(() => {
-		// JSON 파일의 경로들 (url만 수정?)
+		// JSON 파일
 		const jsonFilePaths = [
 			"assets/json/restaurant1.json",
 			"assets/json/restaurant2.json",
-      "assets/json/restaurant3.json"
+			"assets/json/restaurant3.json",
 		];
+		// API URL 주소
+		// const jsonFilePaths = [
+		// 	"http://localhost:8080/get_congestion/restaurant1",
+		// 	"http://localhost:8080/get_congestion/restaurant2",
+		// 	"http://localhost:8080/get_congestion/restaurant3",
+		// ];
 
 		// 여러 JSON 파일 가져오기
 		Promise.all(
@@ -26,9 +30,9 @@ function App() {
 		)
 			.then((dataArray) => setRestaurantData(dataArray))
 			.catch((error) => console.error("Error fetching JSON:", error));
-	}, []); // 빈 배열을 넘겨주면 컴포넌트가 마운트될 때 한 번만 실행
+	}, []);
 
-  return (
+	return (
 		<div className="App">
 			<Header />
 			{restaurantData.map((val, idx) =>
@@ -46,7 +50,7 @@ function App() {
 				);
 			})}
 		</div>
-  );
+	);
 }
 
 export default App;

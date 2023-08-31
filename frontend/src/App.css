@@ -1,16 +1,6 @@
 @import url('https://webfontworld.github.io/SCoreDream/SCoreDream.css');
 @import url('https://fonts.googleapis.com/css2?family=Jua&display=swap');
 
-/* @font-face {
-  font-family: 'BMHANNAPro';
-  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_seven@1.0/BMHANNAPro.woff') format('woff');
-  font-weight: normal;
-  font-style: normal;
-  } */
-
-/* TODO
-  폰트 여러가지 적용해보기
-*/
 * {
   font-family: 'SCoreDream', sans-serif;
   font-family: 'SCoreDream';
