@@ -135,6 +135,7 @@ const Cafeteria = ({ idx, value }) => {
 	const [status, setStatus] = useState("원활");
 	const [rate, setRate] = useState(value);
 	const [menuData, setMenuData] = useState([]);
+	// const myDate = "20230901";
 
 	useEffect(() => {
 		if (rate >= 66) {
@@ -165,7 +166,7 @@ const Cafeteria = ({ idx, value }) => {
 	return (
 		<CafeteriaContainer>
 			<FirstRow>
-				<CafeteriaName>{nameList[idx - 1]}</CafeteriaName>
+				<CafeteriaName>{nameList[idx]}</CafeteriaName>
 				<span style={{ fontWeight: 500, fontSize: 11, marginLeft: 10 }}>
 					{status}
 				</span>

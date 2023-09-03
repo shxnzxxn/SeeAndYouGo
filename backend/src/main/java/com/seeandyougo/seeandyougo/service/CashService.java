@@ -214,7 +214,7 @@ public class CashService {
         return new ArrayList<>(responseMap.values());
     }
 
-    private String changeRestaurantName(String name){
+    public String changeRestaurantName(String name){
         if(name.contains("1학생회관")) name= "1학생회관";
         else if(name.contains("2학생회관")) name= "2학생회관";
         else if(name.contains("3학생회관")) name= "3학생회관";
