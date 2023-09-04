@@ -18,7 +18,8 @@ public class MenuService {
     private final CashService cashService;
 
     public List<MenuResponse> getRestaurantMenu(String name, String date){
-        List<Menu> menusByNameAndDate = menuRepository.findMenusByNameAndDate(name, date);
+        String placeName = cashService.changeRestaurantName(name);
+        List<Menu> menusByNameAndDate = menuRepository.findMenusByNameAndDate(placeName, date);
         return cashService.processMenus(menusByNameAndDate);
     }
 }

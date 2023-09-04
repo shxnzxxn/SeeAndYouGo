@@ -21,7 +21,8 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@CrossOrigin(origins="http://localhost:3001")
+//@CrossOrigin(origins="http://localhost:3001")
+@CrossOrigin(origins="http://frontend:3000")
 public class SKJ_CongestionController {
     private final ConnectedService connectedService;
     private final TimeService timeService;
@@ -36,10 +37,16 @@ public class SKJ_CongestionController {
         String[] str = place.split("");
         String name = str[place.length()-1];
         String placeName = name+"학생회관";
+
         CongestionResponse congestionResponse = new CongestionResponse();
 
         Connected recentConnected = connectedService.getRecentConnected(placeName);
-        congestionResponse.setCapacity(200);
+
+        if(placeName.equals("1학생회관")) congestionResponse.setCapacity(200);
+        else if(placeName.equals("2학생회관")) congestionResponse.setCapacity(500);
+        else if(placeName.equals("3학생회관")) congestionResponse.setCapacity(30);
+//        else if(placeName.equals("4학생회관")) congestionResponse.setCapacity(30);
+
         congestionResponse.setConnected(recentConnected.getConnected());
         congestionResponse.setDateTime(recentConnected.getTime());
         return ResponseEntity.ok(congestionResponse);
@@ -55,10 +62,11 @@ public class SKJ_CongestionController {
 
     @GetMapping("/get_menu/{restaurant}/{date}")
     public ResponseEntity<List<MenuResponse>> todayMenuRequest(
-            @PathVariable("restaurant") String place, @PathVariable("date") String date){
+            @PathVariable("restaurant") String place, @PathVariable("date") String date) throws Exception {
         String[] str = place.split("");
         String name = str[place.length()-1];
         String placeName = name+"학생회관";
+
         return ResponseEntity.ok(menuService.getRestaurantMenu(placeName, date));
     }
 

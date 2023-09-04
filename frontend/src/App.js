@@ -17,9 +17,9 @@ function App() {
 		];
 		// API URL 주소
 		// const jsonFilePaths = [
-		// 	"http://localhost:8080/get_congestion/restaurant1",
-		// 	"http://localhost:8080/get_congestion/restaurant2",
-		// 	"http://localhost:8080/get_congestion/restaurant3",
+		// 	"http://seeandyougo:8080/get_congestion/restaurant1",
+		// 	"http://seeandyougo:8080/get_congestion/restaurant2",
+		// 	"http://seeandyougo:8080/get_congestion/restaurant3",
 		// ];
 
 		// 여러 JSON 파일 가져오기
@@ -41,6 +41,7 @@ function App() {
 				) : null
 			)}
 			{restaurantData.map((val, idx) => {
+				console.log(val)
 				return (
 					<Cafeteria
 						idx={idx + 1}
