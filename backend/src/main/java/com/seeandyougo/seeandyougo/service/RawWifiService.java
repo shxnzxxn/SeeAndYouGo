@@ -22,7 +22,7 @@ public class RawWifiService { //
 //    @Scheduled(fixedDelay = 2000, initialDelay = 2000)
     public void saveRawWifiData() throws Exception{
 
-        String apiUrl = "http://localhost:3030/svc/offcam/pub/WifiAllInfo?AUTH_KEY=efefef"; // API 엔드포인트
+        String apiUrl = "http://wifi-dummy-api:3030/svc/offcam/pub/WifiAllInfo?AUTH_KEY=efefef"; // API 엔드포인트
 
         // URL 생성
         URL url = new URL(apiUrl);
