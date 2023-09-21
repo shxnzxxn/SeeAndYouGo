@@ -11,10 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -22,7 +19,7 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 //@CrossOrigin(origins="http://localhost:3001")
-@CrossOrigin(origins="http://frontend:3000")
+//@CrossOrigin(origins="http://frontend:3000")
 public class SKJ_CongestionController {
     private final ConnectedService connectedService;
     private final TimeService timeService;
@@ -37,6 +34,32 @@ public class SKJ_CongestionController {
         String[] str = place.split("");
         String name = str[place.length()-1];
         String placeName = name+"학생회관";
+        System.out.println("h11");
+//        rawWifiService.saveRawWifiData();
+//        cashService.wifiCashing();
+
+        CongestionResponse congestionResponse = new CongestionResponse();
+
+        Connected recentConnected = connectedService.getRecentConnected(placeName);
+
+        if(placeName.equals("1학생회관")) congestionResponse.setCapacity(200);
+        else if(placeName.equals("2학생회관")) congestionResponse.setCapacity(500);
+        else if(placeName.equals("3학생회관")) congestionResponse.setCapacity(30);
+//        else if(placeName.equals("4학생회관")) congestionResponse.setCapacity(30);
+
+        congestionResponse.setConnected(recentConnected.getConnected());
+        congestionResponse.setDateTime(recentConnected.getTime());
+        return ResponseEntity.ok(congestionResponse);
+    }
+
+    @GetMapping("/api/get_congestion/{restaurant}")
+    public ResponseEntity<CongestionResponse> congestionRequestAPI(@PathVariable("restaurant") String place) throws Exception {
+        String[] str = place.split("");
+        String name = str[place.length()-1];
+        String placeName = name+"학생회관";
+        System.out.println("api recall");
+//        rawWifiService.saveRawWifiData();
+//        cashService.wifiCashing();
 
         CongestionResponse congestionResponse = new CongestionResponse();
 
@@ -66,6 +89,10 @@ public class SKJ_CongestionController {
         String[] str = place.split("");
         String name = str[place.length()-1];
         String placeName = name+"학생회관";
+
+        System.out.println("h22");
+        rawMenuService.saveTodayMenu();
+        cashService.menuTodayCashing();
 
         return ResponseEntity.ok(menuService.getRestaurantMenu(placeName, date));
     }

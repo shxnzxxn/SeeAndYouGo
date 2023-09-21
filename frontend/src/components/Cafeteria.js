@@ -148,8 +148,8 @@ const Cafeteria = ({ idx, value }) => {
 		setRate(value);
 
 		const fetchData = async () => {
-			// "http:localhost:8080/get_menu/{name}/{date}"
-			const res = await fetch(`/assets/json/myMenu.json`, {
+			// "http:seeandyougo:8080/get_menu/{name}/{date}"
+			const res = await fetch(`/api/get_menu/{name}/{date}`, {
 				headers: {
 					"Content-Type": "application/json",
 				},
