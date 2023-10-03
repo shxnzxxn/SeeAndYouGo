@@ -3,6 +3,8 @@ import React, { useEffect, useState } from "react";
 import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import MyProgress from "./MyProgress";
+import Moment from 'moment';
+import "moment/locale/ko";
 
 const CafeteriaContainer = styled.div`
 	width: 100%;
@@ -135,7 +137,9 @@ const Cafeteria = ({ idx, value }) => {
 	const [status, setStatus] = useState("원활");
 	const [rate, setRate] = useState(value);
 	const [menuData, setMenuData] = useState([]);
-	// const myDate = "20230901";
+	const myDate = Moment().format("YYYYMMDD");
+	// const myDate = "20231003";
+	console.log(myDate);
 
 	useEffect(() => {
 		if (rate >= 66) {
@@ -148,14 +152,16 @@ const Cafeteria = ({ idx, value }) => {
 		setRate(value);
 
 		const fetchData = async () => {
-			// "http:localhost:8080/get_menu/{name}/{date}"
-			const res = await fetch(`/assets/json/myMenu.json`, {
+			// "http:seeandyougo:8080/get_menu/{name}/{date}"
+			const res = await fetch(`http://localhost:8080/get_menu/restaurant${idx+1}/${myDate}`, {
 				headers: {
 					"Content-Type": "application/json",
 				},
 				method: "GET",
 			});
 			const result = await res.json();
+			console.log(idx)
+			console.log(result)
 			return result;
 		};
 		fetchData().then((data) => {

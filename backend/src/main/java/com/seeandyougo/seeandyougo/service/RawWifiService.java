@@ -3,6 +3,8 @@ package com.seeandyougo.seeandyougo.service;
 import com.seeandyougo.seeandyougo.repository.RawWifiRepository;
 import com.seeandyougo.seeandyougo.table.RawWifi;
 import lombok.RequiredArgsConstructor;
+
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,11 +21,11 @@ public class RawWifiService { //
     private final RawWifiRepository rawWifiRepository;
 
     @Transactional
-//    @Scheduled(fixedDelay = 2000, initialDelay = 2000)
     public void saveRawWifiData() throws Exception{
 
-        String apiUrl = "http://wifi-dummy-api:3030/svc/offcam/pub/WifiAllInfo?AUTH_KEY=efefef"; // API 엔드포인트
-
+        // String apiUrl = "http://wifi-dummy-api:8080/svc/offcam/pub/WifiAllInfo?AUTH_KEY=efefef"; // API 엔드포인트
+        String apiUrl = "https://api.cnu.ac.kr/svc/offcam/pub/WifiAllInfo?AUTH_KEY=D6E3BE404CC745B885E81D6BD5FE90CD6A59E572";
+        
         // URL 생성
         URL url = new URL(apiUrl);
         // HttpURLConnection 설정
@@ -32,6 +34,7 @@ public class RawWifiService { //
 
         // 응답 코드 확인
         int responseCode = connection.getResponseCode();
+        System.out.println(responseCode);
         String responseData = new String();
 
         // 응답 내용 읽기
