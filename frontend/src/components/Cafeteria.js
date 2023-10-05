@@ -3,8 +3,24 @@ import React, { useEffect, useState } from "react";
 import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import MyProgress from "./MyProgress";
-import Moment from "moment";
+import Moment from 'moment';
 import "moment/locale/ko";
+
+const CafeteriaContainer = styled.div`
+	width: 100%;
+	height: 120px;
+	margin-top: 15px;
+	background-color: white;
+	border-radius: 20px;
+`;
+
+// 1번째 Row (식당 이름, 상태와 혼잡도 게이지 표시)
+const FirstRow = styled.div`
+	display: flex;
+	align-items: center;
+	padding-top: 10px;
+	height: 40%;
+`;
 
 // 식당 이름 표시
 const CafeteriaName = styled.p`
@@ -142,7 +158,8 @@ const Cafeteria = ({ idx, value }) => {
 	const [rate, setRate] = useState(value);
 	const [menuData, setMenuData] = useState([]);
 	const myDate = Moment().format("YYYYMMDD");
-
+	// const myDate = "20231003";
+	console.log(myDate);
 	useEffect(() => {
 		if (rate >= 66) {
 			setStatus("혼잡");
@@ -154,16 +171,16 @@ const Cafeteria = ({ idx, value }) => {
 		setRate(value);
 
 		const fetchData = async () => {
-			const nowUrl = `http://localhost:8080/get_menu/restaurant${idx + 1}/${myDate}`;
-			// const nowUrl = "/assets/json/myMenu.json";
-			// `http://localhost:8080/get_menu/restaurant${idx + 1}/${myDate}`,
-			const res = await fetch(nowUrl, {
+			// "http:seeandyougo:8080/get_menu/{name}/{date}"
+			const res = await fetch(`http://localhost:8080/get_menu/restaurant${idx+1}/${myDate}`, {
 				headers: {
 					"Content-Type": "application/json",
 				},
 				method: "GET",
 			});
 			const result = await res.json();
+			console.log(idx)
+			console.log(result)
 			return result;
 		};
 		fetchData().then((data) => {
