@@ -62,12 +62,7 @@ function App() {
             fetch(path).then((response) => response.json())
          )
       )
-         
-         .then((dataArray) => {
-            setRestaurantData(dataArray)
-            console.log(dataArray)
-         }
-         )
+         .then((dataArray) => setRestaurantData(dataArray))
          .catch((error) => console.error("Error fetching JSON:", error));
    };
    // useEffect(() => {
@@ -133,7 +128,7 @@ function App() {
             // console.log(val);
             return (
                <Cafeteria
-                  idx={idx}
+                  idx={idx + 1}
                   key={idx}
                   value={(val.connected / val.capacity) * 100}
                />
